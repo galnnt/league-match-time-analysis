@@ -41,10 +41,11 @@ For this project, we will be mainly focusing on League of Legends competitive da
 ### Data Cleaning
 
 First of all, here is the raw dataframe:
-| gameid                | datacompleteness   |   url |
-| ---------------------- | ------------------- |------ |
-| ESPORTSTMNT06_2753012 | complete           |   nan |
-| ESPORTSTMNT06_2753012 | complete           |   nan |
-| ESPORTSTMNT06_2753012 | complete           |   nan |
-| ESPORTSTMNT06_2753012 | complete           |   nan |
-| ESPORTSTMNT06_2753012 | complete           |   nan |
+
+| gameid                | datacompleteness   |   url | ...   |   opp_killsat15 |   opp_assistsat15 |   opp_deathsat15 |
+|:----------------------|:-------------------|------:|:------|----------------:|------------------:|-----------------:|
+| ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               0 |                 0 |                0 |
+| ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               0 |                 0 |                0 |
+| ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               0 |                 0 |                0 |
+| ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               1 |                 0 |                0 |
+| ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               0 |                 1 |                0 |
