@@ -500,7 +500,7 @@ Let's see this distribution via a histogram:
   frameborder="0"
 ></iframe>
 
-Since the p-value is less than $$\alpha = 0.05$$, we fail to reject the null: It seems like this model is fair and the difference in RMSEs for sides are solely due to randomness. However, there is clearly room for improvement for other aspects of this model, as perheps the testing RMSE could be improved via more complex models.
+Since the p-value is greater than $$\alpha = 0.05$$, we fail to reject the null: It seems like this model is fair and the difference in RMSEs for sides are solely due to randomness. However, there is clearly room for improvement for other aspects of this model, as perheps the testing RMSE could be improved via more complex models.
 
 ## Conclusion
 
