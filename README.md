@@ -42,7 +42,7 @@ For this project, we will be mainly focusing on League of Legends competitive da
 
 First of all, here is the raw dataframe:
 | gameid                | datacompleteness   |   url |
-|:----------------------|:-------------------|------:|
+| ---------------------- | ------------------- |------ |
 | ESPORTSTMNT06_2753012 | complete           |   nan |
 | ESPORTSTMNT06_2753012 | complete           |   nan |
 | ESPORTSTMNT06_2753012 | complete           |   nan |
