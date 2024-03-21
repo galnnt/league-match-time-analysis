@@ -54,7 +54,7 @@ First of all, here is the raw dataframe:
 | ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               1 |                 0 |                0 |
 | ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               0 |                 1 |                0 |
 
-<\center>
+</center>
 
 There are a total of 130 columns, which is far more than what we need for our analysis.
 
@@ -74,6 +74,8 @@ Before we start imputing the missing data, we first extract the useful columns t
 
 Here is the first few columns of the dataframe that has the columns that are mentioned above (before we start the cleaning):
 
+<center>
+
 | gameid                |   gamelength | league   | position   | champion   |     dpm |   damagetakenperminute |   earnedgold |   result |   goldat15 |
 |:----------------------|-------------:|:---------|:-----------|:-----------|--------:|-----------------------:|-------------:|---------:|-----------:|
 | ESPORTSTMNT06_2753012 |         2612 | LFL2     | top        | Jax        | 328.093 |                719.541 |        13251 |        1 |       5059 |
@@ -81,6 +83,8 @@ Here is the first few columns of the dataframe that has the columns that are men
 | ESPORTSTMNT06_2753012 |         2612 | LFL2     | mid        | Taliyah    | 620.858 |                365.352 |        10118 |        1 |       4956 |
 | ESPORTSTMNT06_2753012 |         2612 | LFL2     | bot        | Ezreal     | 964.893 |                398.453 |        11728 |        1 |       5217 |
 | ESPORTSTMNT06_2753012 |         2612 | LFL2     | sup        | Karma      | 130.199 |                360.276 |         3212 |        1 |       2827 |
+
+</center>
 
 For our dataframe, we will not fill in values for the champion column, as the players are playing the champions, not the teams, so it does not make sense for a team to play a champion. Other than that column, there is not much to do as for the analysis in part 1. Again, we will clean the data in part 2 when we use different columns.
 
@@ -230,12 +234,14 @@ Here is the distribution of the observed missingness by league:
 
 We then shuffle the `league` column and conduct the test. Then we plot the data obtained from the simulation into a histogram and also include our test statistic in there.
 
+<center>
 <iframe
   src="plotly_figs/missing.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+</center>
 
 Our observed statistic is: 0.9915966386554622
 
@@ -278,7 +284,11 @@ Since the p-value is not less than the significance value of $$\alpha = 0.05$$, 
 
 [K'Sante](https://www.youtube.com/watch?v=sJupa3WcN88) was a champion that was released on November 3rd of 2022 in League of Legends. He was supposed to be a tank who is the frontline of a teamfight. However, his ultimate ability was able to transform him into a bruiser, which could potentially annihilate the backline of the enemy team in seconds. With this design of having multiple possible classes, this champion was very controversial and had lots of discussion of whether he was too powerful or not. Even professional players like [Showmaker](https://www.reddit.com/r/leagueoflegends/comments/14f9ewr/showmaker_explains_ksante/) was complaining about how the champion was too strong in the game.
 
+<center>
+
 ![Image](data/ksante.jpeg)
+
+</center>
 
 Due to his kit, K'Sante appeared frequently in professional play as a great frontliner. Given the style of play in the professional scene of centering around the bottom lane, it may be an interesting question to ask: Do professional games having K'Sante last significantly longer than those games without K'Sante?
 
