@@ -103,9 +103,11 @@ Next, let's look at the damage taken per minute, but only for junglers. In 2023,
 ></iframe>
 
 Again, we see this roughly log-normal pattern appear for the junglers' data. Note that the peak of this histogram is somewhere around the 850-900 mark. Combining this with the above plt about the distributions of game length, we can generate a very rough estimate for the damage taken per minute for all League of Legends professional games in 2023: We have that about 
+
 $$
 [850 \cdot 30, 900 \cdot 30] = [25500, 27000]
 $$
+
 damage is taken from the jungler in a normal professional match in League of Legends in 2023.
 
 ### Bivariate Analysis
@@ -266,9 +268,7 @@ Our observed statistic is: 0.0003001200480191868
 
 Our p-value is: 0.9335
 
-Since the p-value is not less than the significance value of 
-$\alpha = 0.05$
-, we fail to reject the null. It seems like the missingness of `goldat15` is not dependent on `result`.
+Since the p-value is not less than the significance value of $$\alpha = 0.05$$, we fail to reject the null. It seems like the missingness of `goldat15` is not dependent on `result`.
 
 ## Step 4: Hypothesis Testing
 
@@ -279,14 +279,16 @@ $\alpha = 0.05$
 Due to his kit, K'Sante appeared frequently in professional play as a great frontliner. Given the style of play in the professional scene of centering around the bottom lane, it may be an interesting question to ask: Do professional games having K'Sante last significantly longer than those games without K'Sante?
 
 To answer this question, let's first set up our null and alternative hypothosis. We have 
+
 $$
 H_0: \text{Game lengths having or not having K'Sante are the same,}
 $$
+
 $$
 H_1: \text{Professional game lengths having K'Sante are longer compared with those not having K'Sante.}
 $$
 
-For this test, we will just use the standard threshold of $\alpha = 0.5$ for the test. To do this, we will have to conduct a permutation test on the games which have K'Sante and the ones which don't. To do that, we create a dataframe with another column which tells whether K'Sante is in the list of champions in that game. Here are the first few rows:
+For this test, we will just use the standard threshold of $$\alpha = 0.5$$ for the test. To do this, we will have to conduct a permutation test on the games which have K'Sante and the ones which don't. To do that, we create a dataframe with another column which tells whether K'Sante is in the list of champions in that game. Here are the first few rows:
 
 | gameid             |   gamelength | champion  | ksante?   |
 |:-------------------|-------------:|----------:|----------:|
@@ -297,9 +299,11 @@ For this test, we will just use the standard threshold of $\alpha = 0.5$ for the
 | 10000-10000_game_5 |         1691 |[Sion, Karthus, Ryze, Xayah, Alistar, Camille, ...]| False     |
 
 In this case, we will use the difference in means as our test statistic, i.e.
+
 $$
 t = \text{mean time of games with K'Sante} - \text{mean time of games without K'Sante}
 $$
+
 This test statistic is a good choice for our hypothesis as larger values of the statistic indicate that the average time for professional games having K'Sante in them is more than those not including K'Sante. Again, we will do a permutation test here, and here is the histogram of the empirical distribution of the test statistic:
 
 <iframe
@@ -313,9 +317,7 @@ Our observed statistic is: 7.134315024219177
 
 Our p-value is: 0.159
 
-Since this is more than our threshold of 
-$\alpha = 0.05$
-, we fail to reject the null, meaning that it seems like game lengths having or not having K'Sante are about the same.
+Since this is more than our threshold of $$\alpha = 0.05$$, we fail to reject the null, meaning that it seems like game lengths having or not having K'Sante are about the same.
 
 ## Step 5: Framing a Prediction Problem
 
@@ -325,11 +327,13 @@ This piece of data can be crucial for analysts in professional teams as they can
 
 Therefore, in this step, we are going to predict the question "About how long will a League of Legends professional match take?"
 
-We are going to predict the `gamelength` column of this League of Legends dataset, and we are going to evaluate the performance of our model using the root mean squared error (RMSE). Recall the RMSE is calculated by 
+We are going to predict the `gamelength` column of this League of Legends dataset, and we are going to evaluate the performance of our model using the root mean squared error (RMSE). Recall the RMSE is calculated by
+
 $$
 \text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - H(x_i))^2}
 $$
-We are going to use the RMSE because it is indicative of how much error our training model has on the dataset it is predicting. A lower RMSE indicates that the model has a better performance for predicting the length of a game. We choose the RMSE over the coefficient of determination, $r^2$, because $r^2$ is more indicative of the performance of our model on the training data, while the RMSE is more indicative of the performance of the model on the testing data.
+
+We are going to use the RMSE because it is indicative of how much error our training model has on the dataset it is predicting. A lower RMSE indicates that the model has a better performance for predicting the length of a game. We choose the RMSE over the coefficient of determination, $$r^2$$, because $$r^2$$ is more indicative of the performance of our model on the training data, while the RMSE is more indicative of the performance of the model on the testing data.
 
 ## Step 6: Baseline Model
 
@@ -381,9 +385,11 @@ We will work in the next section to trying to improve the existing model.
 To account for the complexities that are not accounted for in the previous simple model, we first introduce some new features that we are going to add into our new (more sophisticated) model:
 
 From the official definition from League of Legends, __creep score__, or better known as __cs__, is the amount of units that a player slays in a League of Legends match. These can come from minions, jungle camps, or even neutral objectives. We define the term __effective cs__ as
+
 $$
 \text{effective cs} := \text{minions killed} + 4 \cdot \text{monsters killed}
 $$
+
 Note that this definition is different from the `total cs` column that is defined in the dataframe. This definition comes from how League of Legends counts creep scores in game: 1 for each minion and 4 four each non-minion creature. This definition makes sense as monsters (jungle camps and neutral objectives) take longer to spawn and are harder to kill, hence their corresponding creep scores are higher.
 
 Note that the `minionkills` column is missing some values. We will use probabilistic imputation to resolve this issue.
@@ -393,9 +399,11 @@ Another new feature that we will encode into our model is the total number of in
 ![Image](data/inhib.webp)
 
 An important fact about inhibitors is that once they are destroyed, super-minions, which are more powerful versions of minions, will be spawned to delay the action of the losing team, and allows the team who destroyed the inhibitors to use this time and space provided for useful things, such as killing neutral objectives. They respawn 5 minutes after being destroyed. For our model, we define __total inhibitors destroyed__ by
+
 $$
 \text{total inhibs} := \text{Number of inhibitors destroyed} + \text{Number of inhibitors destroyed by opponent}
 $$
+
 This makes sense as the more inhibitors are destroyed, the more back and forth the game is since neither team can end within the next 5 minutes while their inhibitor is respawning. 
 
 We will have to impute data into the `inhibitors` column though as some of it is missing. In this case, we will implement probabilistic imputation as well
@@ -461,9 +469,9 @@ Fun fact: For the competitions, the team choosing sides for the game is decided 
 
 To check whether this is true, we have the following hypothesis:
 
-$H_0$: Our model is fair. Its RMSE for red side and blue side are roughly the same, and differences are due to randomness.
+$$H_0$$: Our model is fair. Its RMSE for red side and blue side are roughly the same, and differences are due to randomness.
 
-$H_1$: Our model is unfair. Its RMSE for the red side is different than that on the blue side.
+$$H_1$$: Our model is unfair. Its RMSE for the red side is different than that on the blue side.
 
 Note that we are doing a non-directional test here, and we will use an alpha value of $\alpha = 0.02$ so that the critical region on either side has area 0.01. First, we show the dataframe we used from last section together with the `side` column here:
 
@@ -492,9 +500,7 @@ Let's see this distribution via a histogram:
   frameborder="0"
 ></iframe>
 
-Since the p-value is less than 
-$\alpha = 0.05$
-, we reject in the null in favor of the alternative: It seems like this model is unfair as its RMSE is different on the red side compared to the blue side. There is clearly room for improvement for the bias of this model.
+Since the p-value is less than $$\alpha = 0.05$$, we reject in the null in favor of the alternative: It seems like this model is unfair as its RMSE is different on the red side compared to the blue side. There is clearly room for improvement for the bias of this model.
 
 ## Conclusion
 
