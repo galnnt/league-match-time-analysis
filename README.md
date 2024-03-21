@@ -49,3 +49,71 @@ First of all, here is the raw dataframe:
 | ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               0 |                 0 |                0 |
 | ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               1 |                 0 |                0 |
 | ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               0 |                 1 |                0 |
+
+There are a total of 130 columns, which is far more than what we need for our analysis.
+
+Regarding the analysis of our data, we are most interested in the following columns:
+
+`gameid`: The unique identification for the League match, as a string
+
+`gamelength`: The length of the competitive match in seconds, as an integer
+
+`league`: The league (region) that the match took place in
+
+`****at**`: The specific game statistic at xx minutes into the game. For example, `opp_assistsat15` would correspond to the number of assists that the particular opponent has at the 15 minute mark. We won't talk all of this obviously, but chances are that some of it have clear relations.
+
+One important point (which we will get into later) of this dataframe is that each unique professional game is encapsulated in 12 rows: The first five rows consists of player statistics for the blue team, and the next five rows correspond to the player statistics of the red team. The eleventh and twelveth row are just team statistics for the blue and red team respectively. This will also matter as it decides what we can or cannot impute into the dataset when cleaning up this dataframe.
+
+Before we start imputing the missing data, we first extract the useful columns that will be used for our analysis for this part (until the end of hypothesis testing): `gamelength`, `league`, `position`, `champion`, `dpm`, & `damagetakenperminute`.
+
+Here is the first few columns of the dataframe that has the columns that are mentioned above (before we start the cleaning):
+
+| gameid                |   gamelength | league   | position   | champion   |     dpm |   damagetakenperminute |   earnedgold |   result |   goldat15 |
+|:----------------------|-------------:|:---------|:-----------|:-----------|--------:|-----------------------:|-------------:|---------:|-----------:|
+| ESPORTSTMNT06_2753012 |         2612 | LFL2     | top        | Jax        | 328.093 |                719.541 |        13251 |        1 |       5059 |
+| ESPORTSTMNT06_2753012 |         2612 | LFL2     | jng        | Poppy      | 142.856 |                847.305 |         6478 |        1 |       4325 |
+| ESPORTSTMNT06_2753012 |         2612 | LFL2     | mid        | Taliyah    | 620.858 |                365.352 |        10118 |        1 |       4956 |
+| ESPORTSTMNT06_2753012 |         2612 | LFL2     | bot        | Ezreal     | 964.893 |                398.453 |        11728 |        1 |       5217 |
+| ESPORTSTMNT06_2753012 |         2612 | LFL2     | sup        | Karma      | 130.199 |                360.276 |         3212 |        1 |       2827 |
+
+For our dataframe, we will not fill in values for the champion column, as the players are playing the champions, not the teams, so it does not make sense for a team to play a champion. Other than that column, there is not much to do as for the analysis in part 1. Again, we will clean the data in part 2 when we use different columns.
+
+### Univariate Analysis
+
+First of all, let's take a look at how the overall game lengths are distributed across our data. Notice we only need to take every row that is a multiple of twelve because every twelve rows in our dataset represents a unique League of Legends competitive match in 2023.
+
+<iframe
+  src="plotly_figs/lengths.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The distribution seems to be roughly [log-normal](https://en.wikipedia.org/wiki/Log-normal_distribution#:~:text=In%20probability%20theory%2C%20a%20log,X\)%20has%20a%20normal%20distribution.) with the peak of the histogram being somewhere arounf the 1800 second mark, which agrees with the average time of a League of Legends game: 30 minutes (even not in the competitive scene).
+
+Next, let's look at the damage taken per minute, but only for junglers. In 2023, a lot of the jungler picks are curated so that they are meant to provide the necessary space for the bot lane players to deal heavy damage. Therefore we would expect them to 'tank' the most damage in a teamfight.
+
+<iframe
+  src="plotly_figs/dtpmjg.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Again, we see this roughly log-normal pattern appear for the junglers' data. Note that the peak of this histogram is somewhere around the 850-900 mark. Combining this with the above plt about the distributions of game length, we can generate a very rough estimate for the damage taken per minute for all League of Legends professional games in 2023: We have that about 
+$$
+[850 \cdot 30, 900 \cdot 30] = [25500, 27000]
+$$
+damage is taken from the jungler in a normal professional match in League of Legends in 2023.
+
+### Bivariate Analysis
+
+Once when I was watching a League of Legends game in China, one of casters was criticizing the bot lane player of the losing team. According to them, the player "was given huge amounts of resources that are sacrificed by his team, yet his impact in team fights were far lower compared to the amount of resources that he got". A natural reasoning when we play League of Legends is that the more amount of gold a player has compared to his opponent, the more damage the player is able to deal throughout the game. Is this actually a reasonable claim? To answer this question, we are going to compare the total amount of gold in the game with the damage per minute, but only for bot laners, as they are the main source of damage threat to the enemy team. Here is the first few rows of the dataframe that we are going to use:
+
+|     dpm |   earnedgold |
+|--------:|-------------:|
+| 964.893 |        11728 |
+| 507.267 |        11219 |
+| 714.163 |        14318 |
+| 524.163 |        14858 |
+| 344.212 |         9219 |
