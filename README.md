@@ -446,16 +446,16 @@ hyperparameters = {
 
 After many rounds of tuning, we find that the best set of hyperparameters are :
 - `max_depth`: 11,
-- `min_samples_split`: 205,
-- `criterion`: 'friedman_mse'.
+- `min_samples_split`: 201,
+- `criterion`: 'squared_error'.
 
 We then encode this into the pipeline that we had earlier to obtain our final model that we are going to use for the fairness analysis later.
 
 After fitting the final model, we have:
 
-Training RMSE: 197.22945435792587,
+Training RMSE: 197.18697287811418,
 
-Testing RMSE: 203.2942463364559.
+Testing RMSE: 202.22699668990253.
 
 From above, we can see that, although the training RMSE increased, the test RMSE decreased from the part that we examined in our baseline model. Moreover, the two errors are very similar in magnitude, which implies that this model is likely more generalizable for League of Legends competitive match datasets to analyze the game lengths.
 
@@ -487,9 +487,9 @@ For this test, our test statistic will be the absolute difference in RMSEs, as g
 
 Is this statistic significant? Let's take a look by running a permutation test!
 
-Observed statistic: 4.570179968661904.
+Observed statistic: 2.8994694514119885.
 
-p-value: 0.0174.
+p-value: 0.1314.
 
 Let's see this distribution via a histogram:
 
@@ -500,7 +500,7 @@ Let's see this distribution via a histogram:
   frameborder="0"
 ></iframe>
 
-Since the p-value is less than $$\alpha = 0.05$$, we reject in the null in favor of the alternative: It seems like this model is unfair as its RMSE is different on the red side compared to the blue side. There is clearly room for improvement for the bias of this model.
+Since the p-value is less than $$\alpha = 0.05$$, we fail to reject the null: It seems like this model is fair and the difference in RMSEs for sides are solely due to randomness. However, there is clearly room for improvement for other aspects of this model, as perheps the testing RMSE could be improved via more complex models.
 
 ## Conclusion
 
