@@ -44,6 +44,8 @@ For this project, we will be mainly focusing on League of Legends competitive da
 
 First of all, here is the raw dataframe:
 
+<center>
+
 | gameid                | datacompleteness   |   url | ...   |   opp_killsat15 |   opp_assistsat15 |   opp_deathsat15 |
 |:----------------------|:-------------------|------:|:------|----------------:|------------------:|-----------------:|
 | ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               0 |                 0 |                0 |
@@ -51,6 +53,8 @@ First of all, here is the raw dataframe:
 | ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               0 |                 0 |                0 |
 | ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               1 |                 0 |                0 |
 | ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               0 |                 1 |                0 |
+
+<\center>
 
 There are a total of 130 columns, which is far more than what we need for our analysis.
 
@@ -131,7 +135,7 @@ Once when I was watching a League of Legends game in China, one of casters was c
 
 It seems like there is an positive correlation between the amount of gold earned and the dama dealt per minute, which makes sense intuitively: The more gold the player has in the game, the better the items are going to be, so that the champion they choose is able to deal more damage.
 
-Next, let's look at the spread of damage taken per minute across different game roles. Note that we are analyzing this in terms of the individual positions, hence we are getting rid of the rows which contain "team" as their position name. Here is the dataframe we will be using:
+Next, let's look at the spread of damage taken per minute across different game roles. Note that we are analyzing this in terms of the individual positions, hence we are getting rid of the rows which contain "team" as their position name. Here is the first few rows of the dataframe we will be using:
 
 | position   |   damagetakenperminute |
 |:-----------|-----------------------:|
