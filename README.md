@@ -44,7 +44,9 @@ For this project, we will be mainly focusing on League of Legends competitive da
 
 First of all, here is the raw dataframe:
 
-<center>
+<div style="margin-left: auto;
+            margin-right: auto;
+            width: 30%">
 
 | gameid                | datacompleteness   |   url | ...   |   opp_killsat15 |   opp_assistsat15 |   opp_deathsat15 |
 |:----------------------|:-------------------|------:|:------|----------------:|------------------:|-----------------:|
@@ -54,7 +56,7 @@ First of all, here is the raw dataframe:
 | ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               1 |                 0 |                0 |
 | ESPORTSTMNT06_2753012 | complete           |   nan | ...   |               0 |                 1 |                0 |
 
-</center>
+</div>
 
 There are a total of 130 columns, which is far more than what we need for our analysis.
 
