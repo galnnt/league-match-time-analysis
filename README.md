@@ -246,7 +246,7 @@ Our observed statistic is: 0.0003001200480191868
 
 Our p-value is: 0.9335
 
-Since the p-value is not less than the significance value of $\alpha = 0.05$, we fail to reject the null. It seems like the missingness of `goldat15` is not dependent on `result`.
+Since the p-value is not less than the significance value of $ \alpha = 0.05 $, we fail to reject the null. It seems like the missingness of `goldat15` is not dependent on `result`.
 
 ## Step 4: Hypothesis Testing
 
@@ -292,3 +292,5 @@ Our observed statistic is: 7.134315024219177
 Our p-value is: 0.159
 
 Since this is more than the normal threshold of 0.05, we fail to reject the null, meaning that it seems like game lengths having or not having K'Sante are about the same.
+
+## Step 5: Framing a Prediction Problem
