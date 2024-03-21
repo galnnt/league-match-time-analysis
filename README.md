@@ -6,7 +6,7 @@
 
 <script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
-## Step 1: Introduction
+## Introduction
 
 __League of Legends__ (LOL) is a Multiplayer Online Battle Arena (MOBA) game made by Riot games in 2009. In this game, 10 players are divided into 2 teams of 5 each (the blue side and the red side), and pick their respective champions (I will explain what this is later) to try to win the game by defeating the other team. Here is the game map:
 
@@ -38,7 +38,7 @@ The designers of League of Legends do not want the average competitive game to l
 
 For this project, we will be mainly focusing on League of Legends competitive data from Season 13 (2023). The dataset contains information about all the professional matches that occured in Season 13 within the competitive scene. Some of its columns include the champions that professional LOL players picked in their games, the result of the game, and certain statistics that are related within the competitive match.
 
-## Step 2: Data Cleaning and Exploratory Data Analysis
+## Data Cleaning and Exploratory Data Analysis
 
 ### Data Cleaning
 
@@ -178,7 +178,7 @@ Here is the data after grouping (mean and median):
 
 It turns out that both regions, on average, end their game somewhat around the 30-minute mark, different to people expectations. This may be because of the shift in patches which increased the game's tempo so that the professional scene had to adapt to these changes as well, but we cannot be 100% sure.
 
-## Step 3: Assessment of Missingness
+## Assessment of Missingness
 
 To assess the missingness mechanisms, we are going to use the raw dataset. We first rule some of the columns that are missing by design (MD):
 
@@ -270,7 +270,7 @@ Our p-value is: 0.9335
 
 Since the p-value is not less than the significance value of $$\alpha = 0.05$$, we fail to reject the null. It seems like the missingness of `goldat15` is not dependent on `result`.
 
-## Step 4: Hypothesis Testing
+## Hypothesis Testing
 
 [K'Sante](https://www.youtube.com/watch?v=sJupa3WcN88) was a champion that was released on November 3rd of 2022 in League of Legends. He was supposed to be a tank who is the frontline of a teamfight. However, his ultimate ability was able to transform him into a bruiser, which could potentially annihilate the backline of the enemy team in seconds. With this design of having multiple possible classes, this champion was very controversial and had lots of discussion of whether he was too powerful or not. Even professional players like [Showmaker](https://www.reddit.com/r/leagueoflegends/comments/14f9ewr/showmaker_explains_ksante/) was complaining about how the champion was too strong in the game.
 
@@ -319,7 +319,7 @@ Our p-value is: 0.159
 
 Since this is more than our threshold of $$\alpha = 0.05$$, we fail to reject the null, meaning that it seems like game lengths having or not having K'Sante are about the same.
 
-## Step 5: Framing a Prediction Problem
+## Framing a Prediction Problem
 
 Within the competitive scene of League of Legends, the time for a team to finish off a game is a very important factor. Certain teams like to finish their game early as they favor playing compositions that spike in the first 15 minutes, while others like to wait under the game goes over their 35 minutes and use their fantastic teamfighting skills to end the game. 
 
@@ -335,7 +335,7 @@ $$
 
 We are going to use the RMSE because it is indicative of how much error our training model has on the dataset it is predicting. A lower RMSE indicates that the model has a better performance for predicting the length of a game. We choose the RMSE over the coefficient of determination, $$r^2$$, because $$r^2$$ is more indicative of the performance of our model on the training data, while the RMSE is more indicative of the performance of the model on the testing data.
 
-## Step 6: Baseline Model
+## Baseline Model
 
 To make a basic prediction, we plan on using a simple regression model with the following columns: `patch`, `position`, and `totalgold`. In detail, these are:
 - `patch`: The version of the game at the particular date. It may be that some patches encourage faster game pace while others prefer slower ones.
@@ -380,7 +380,7 @@ From the above, we can see that the performance of the model is much better for 
 
 We will work in the next section to trying to improve the existing model.
 
-## Step 7: Final Model
+## Final Model
 
 To account for the complexities that are not accounted for in the previous simple model, we first introduce some new features that we are going to add into our new (more sophisticated) model:
 
@@ -459,7 +459,7 @@ Testing RMSE: 203.2942463364559.
 
 From above, we can see that, although the training RMSE increased, the test RMSE decreased from the part that we examined in our baseline model. Moreover, the two errors are very similar in magnitude, which implies that this model is likely more generalizable for League of Legends competitive match datasets to analyze the game lengths.
 
-## Step 8: Fairness Analysis
+## Fairness Analysis
 
 Finally, we are going to see whether this model does equally well on different groups of data. An important issue might be: Does this model perform equally well on both the red and blue side when predicting match times?
 
